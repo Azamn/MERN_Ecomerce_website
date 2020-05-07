@@ -6,10 +6,29 @@ const app = express();
 
 const port = 5000;
 
-app.get("/", (req, res) => {
-    return res.send("Home Page");
 
-});
+const home = (req, res) => {
+    return res.send("This is Home Dashboard");
+};
+
+const admin = (req, res) => {
+    return res.send("This is Admin Dashboard");
+};
+
+
+app.get("/", home);
+
+const isAdmin = (req, res, next) => {
+    console.log("isAdmin is running");
+    next();
+};
+
+const isLoggedIn = (req,res,next) => {
+    console.log("user is logged in");
+    next();
+};
+
+app.get("/admin", isLoggedIn, isAdmin, admin);
 
 
 app.get("/login", (req, res) => {
