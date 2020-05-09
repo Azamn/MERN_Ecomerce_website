@@ -62,7 +62,7 @@ exports.signin = (req,res) => {
         res.cookie("token", token, {expire:new Date() + 9999 });
 
         //send response on front end
-        const {_id, name,email,role} = user;
+        const {_id, name, email, role} = user;
         return res.json({token, user: {_id, name, email, role} });
 
     });
@@ -90,7 +90,7 @@ exports.isSignedIn = expressJwt({
 // custom middlewares
 
 exports.isAuthenticated = (req, res, next) => {
-    let checker = req.profile && req.auth && req.profile._id === req.auth._id;
+    let checker = req.profile && req.auth && req.profile._id == req.auth._id;
     if(!checker){
         return res.status(403).json({
             error: "ACCESS DENIED"
@@ -100,9 +100,9 @@ exports.isAuthenticated = (req, res, next) => {
 };
 
 exports.isAdmin = (req, res, next) => {
-    if(req.profile.role === 0){
+    if(req.profile.role == 0){
         return res.status(403).json({
-            error:"You Are Not Admin, ACCESS DENIED";
+            error:"You Are Not Admin, ACCESS DENIED"
         });
     }
     next();

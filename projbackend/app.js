@@ -9,7 +9,10 @@ const bodyParser = require("body-parser");          // it is used for middleware
 const cookieParser = require("cookie-parser");      // it is used for middleware
 const cors = require("cors");                       // it is used for middleware
 
+
+// My routes
 const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/user");
 
 
 // DB Connection
@@ -30,6 +33,7 @@ app.use(cors());
 // My Routes
 
 app.use("/api", authRoutes);
+app.use("/api", userRoutes);
 
 // Port
 const port = process.env.PORT || 8000;
